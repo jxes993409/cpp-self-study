@@ -3,9 +3,9 @@
 ```
 struct Student
 {
-	string name;
-	string id;
-	short gender;
+    string name;
+    string id;
+    short gender;
 };
 ```
 ## construct struct
@@ -31,10 +31,10 @@ The priority `.` is higher than `*`.
 // data type should be same
 struct Input_data
 {
-	unsigned int ready: 1;
-	unsigned int valid: 1;
-	unsigned int data1: 4;
-	unsigned int data2: 4;
+    unsigned int ready: 1;
+    unsigned int valid: 1;
+    unsigned int data1: 4;
+    unsigned int data2: 4;
 };
 
 Input_data x = {0, 1, 14, 14};
@@ -77,10 +77,10 @@ enum class color_type_1
 
 enum class color_type_2
 {
-	red,
-	black,
-	white,
-	green
+    red,
+    black,
+    white,
+    green
 };
 ```
 ```
