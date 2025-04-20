@@ -291,17 +291,17 @@ template<template <typename> typename container, typename T>
 class wrapper
 {
 private:
-	container<T> m_container;
+    container<T> m_container;
 public:
-	wrapper(const container<T>& o): m_container(o) {}
-	void output()
-	{
-		for (auto m_c: m_container)
-		{
-			cout << m_c << " ";
-		}
-		cout << endl;
-	}
+    wrapper(const container<T>& o): m_container(o) {}
+    void output()
+    {
+        for (auto m_c: m_container)
+        {
+            cout << m_c << " ";
+        }
+        cout << endl;
+    }
 
 };
 
@@ -310,5 +310,5 @@ wrapper<vector, int> data_12(vec);
 data_12.output();
 ```
 ```
-0 1 2 3 4 5 
+0 1 2 3 4 5
 ```

@@ -160,7 +160,7 @@ int main()
 
 	my_class<int, char> data_3(0, 'a');
 	my_class<string, float> data_4("abc", 0.0);
-	
+
 	data_3.output();
 	data_4.output();
 
@@ -173,29 +173,29 @@ int main()
 	my_class<int*, int*> data_6(ptr_1, ptr_2);
 
 	data_6.output();
-	
+
 	delete ptr_1;
 	ptr_1 = nullptr;
 	delete ptr_2;
 	ptr_2 = nullptr;
-	
+
 	int arr_0[5] = {0, 1, 2, 3, 4};
 	double arr_1[5] = {0.0, 1.0, 2.0, 3.0, 4.0};
-	
+
 	const int n_1 = 5;
 	int n_2 = 5;
-	
+
 	my_array<int, 5> data_7(arr_0);
 	// n can be const type
 	my_array<int, n_1> data_8(arr_0);
 	// n_2 must be constant type
 	// my_array<int, n_2> data_9(arr_0);
-	
+
 	// int, 5
 	my_array<> data_10(arr_0);
 	// double, 5
 	my_array<double> data_11(arr_1);
-	
+
 	data_7.output();
 
 	vector<int> vec = {0, 1, 2, 3, 4, 5};
