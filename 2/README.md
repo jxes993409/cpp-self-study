@@ -58,15 +58,15 @@ struct my_struct
 ```
 #define PROPERTY(type, member) \
 private: \
-	type m_##member; \
+    type m_##member; \
 public: \
-	type get_##member() {return m_##member;} \
-	void set_##member(type m) {m_##member = m;}
+    type get_##member() {return m_##member;} \
+    void set_##member(type m) {m_##member = m;}
 
 class my_class
 {
-	PROPERTY(int, a);
-	PROPERTY(string, b);
+    PROPERTY(int, a);
+    PROPERTY(string, b);
 };
 
 // same as
