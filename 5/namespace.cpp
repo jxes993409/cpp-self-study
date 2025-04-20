@@ -40,7 +40,7 @@ int main()
 {
     using namespace space_0;
     // same as int max_num = space_0::my_max(5, 6);
-    
+
     // this will use global space my_max
     int max_num = ::my_max(5, 6);
 

@@ -62,7 +62,7 @@ When variables have the same name, the namespace should be explicitly declared
 ```
 int a = 1;
 namespace space_2
-{ 
+{
     int a = 2;
     namespace space_3
     {
@@ -136,8 +136,8 @@ catch(int e)
 ```
 struct my_exception_struct
 {
-	string message;
-	unsigned int error_code;
+    string message;
+    unsigned int error_code;
 };
 
 try
@@ -156,7 +156,7 @@ this is an exception_struct, 20
 ```
 string my_exception_function()
 {
-	return "this is an exception function";
+    return "this is an exception function";
 }
 
 try

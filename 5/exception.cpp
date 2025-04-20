@@ -32,7 +32,7 @@ int main()
 	{
 		cout << e << endl;
 	}
-	
+
 	try
 	{
 		throw my_exception_struct{"this is an exception_struct", 20};
@@ -41,7 +41,7 @@ int main()
 	{
 		cout << e.message << ", " << e.error_code << endl;
 	}
-	
+
 	try
 	{
 		throw my_exception_function;
