@@ -230,10 +230,8 @@ DEF ~person()
 GHI ~person()
 ```
 1. access valid `shared_ptr`
-2. Check if the object is valid.
-If `weak_ptr.lock()` returns `nullptr`, it means the object pointed to by `weak_ptr` has been deleted
-3. Avoid race condition
-In multithreaded conditions, `weak_ptr.lock()` is an atomic operation that can prevent race conditions
+2. Check if the object is valid.<br>If `weak_ptr.lock()` returns `nullptr`, it means the object pointed to by `weak_ptr` has been deleted
+3. Avoid race condition<br>In multithreaded conditions, `weak_ptr.lock()` is an atomic operation that can prevent race conditions
 ```
 weak_ptr<base> w_ptr_0;
 {
@@ -251,15 +249,7 @@ cout << "out scope: " << s_ptr_8 << endl;
 in scope: 0x55da7079e4e0
 out scope: 0
 ```
-1. Create shared_ptr (use_count +1)
-![image_0](img/0.png)
-2. Create weak_ptr (weak_count +1)
-If use_count > 0, it means the object exists, and the `weak_ptr` can observe the object
-![image_1](img/1.png)
-3. Delete shared_ptr (use_count -1)
-When leaving the scope, the `shared_ptr` is deleted
-If `use_count = 0`, it means the object has been destructed
-![image_2](img/2.png)
-4. Delete weak_ptr (weak_count -1)
-When leaving the scope, the `weak_ptr` and `control block` are deleted
-![image_3](img/3.png)
+1. Create shared_ptr (use_count +1)<br>![image_0](img/0.png)
+2. Create weak_ptr (weak_count +1)<br>If use_count > 0, it means the object exists, and the `weak_ptr` can observe the object<br>![image_1](img/1.png)
+3. Delete shared_ptr (use_count -1)<br>When leaving the scope, the `shared_ptr` is deleted<br>If `use_count = 0`, it means the object has been destructed<br>![image_2](img/2.png)
+4. Delete weak_ptr (weak_count -1)<br>When leaving the scope, the `weak_ptr` and `control block` are deleted<br>![image_3](img/3.png)
