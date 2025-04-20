@@ -143,7 +143,7 @@ long address = reinterpret_cast<long>(&a_obj);
 ```
 void print_str(char* str)
 {
-	cout << "string: " << str << endl;
+    cout << "string: " << str << endl;
 }
 
 const char* str = "Hello World!";
@@ -167,8 +167,8 @@ However, even if the constant qualifier is removed from the data, it still canno
 ```
 void print_str(char* str)
 {
-	str[0] = 'h';
-	cout << "string: " << str << endl;
+    str[0] = 'h';
+    cout << "string: " << str << endl;
 }
 
 const char* str = "Hello World!";
