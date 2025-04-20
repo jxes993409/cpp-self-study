@@ -35,7 +35,7 @@ public:
 	{
 		o << "real: " << cplex.r << endl;
 		o << "imaginary: " << cplex.i << endl;
-		
+
 		return o;
 	}
 };

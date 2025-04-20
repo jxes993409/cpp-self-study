@@ -45,7 +45,7 @@ public:
     {
         o << "real: " << cplex.r << endl;
         o << "imaginary: " << cplex.i << endl;
-        
+
         return o;
     }
 };
@@ -166,21 +166,21 @@ cout << data_5(6.0) << endl;
 class local_ptr
 {
 private:
-	linear_function* m_ptr;
+    linear_function* m_ptr;
 public:
-	local_ptr(linear_function* p): m_ptr(p) {}
-	~local_ptr()
-	{
-		if (m_ptr != nullptr)
-		{
-			delete m_ptr;
-			m_ptr = nullptr;
-		}
-	}
-	linear_function* operator->() {return m_ptr;}
-	// delete ptr_1 = ptr_2 and ptr_1(ptr_2), avoid point to same address
-	local_ptr(const local_ptr&) = delete;
-	local_ptr& operator=(const local_ptr&) = delete;
+    local_ptr(linear_function* p): m_ptr(p) {}
+    ~local_ptr()
+    {
+        if (m_ptr != nullptr)
+        {
+            delete m_ptr;
+            m_ptr = nullptr;
+        }
+    }
+    linear_function* operator->() {return m_ptr;}
+    // delete ptr_1 = ptr_2 and ptr_1(ptr_2), avoid point to same address
+    local_ptr(const local_ptr&) = delete;
+    local_ptr& operator=(const local_ptr&) = delete;
 };
 
 local_ptr ptr(new linear_function{2.0, 5.0});
