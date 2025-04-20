@@ -18,7 +18,7 @@ int main()
 {
 	// max size of the data1, data2, data3
 	printf("size of my_union: %ld", sizeof(my_union));
-	// 
+
 	my_union union_1;
 	union_1.data1 = 0xFFFF;
 	union_1.data3 = {'a', 'b', 0xFF};

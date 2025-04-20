@@ -31,10 +31,10 @@ int main()
 	Student student_1 = {"Tom", "000", 0};
 	// initialize all variable to 0
 	Student student_2 = {};
-	
+
 	// construct by pointer
 	Student* student_3 = new Student{"Tom", "000", 0};
-	
+
 	student_3->name;
 	(*student_3).name;
 
