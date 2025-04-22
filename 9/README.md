@@ -52,7 +52,7 @@ for(int number: numbers)
 cout << endl;
 ```
 ```
-before sort: 6 10 11 8 22 33 5 0 -5 9 20 
+before sort: 6 10 11 8 22 33 5 0 -5 9 20
 after sort: 33 22 20 11 10 9 8 6 5 0 -5
 ```
 ## Capture clause
