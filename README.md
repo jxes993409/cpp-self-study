@@ -7,3 +7,4 @@
 6. [Type Casting](https://github.com/jxes993409/cpp-self-study/tree/main/6/README.md)
 7. [std::function & std::mem_fn & std::bind](https://github.com/jxes993409/cpp-self-study/tree/main/7/README.md)
 8. [Smart Pointer](https://github.com/jxes993409/cpp-self-study/tree/main/8/README.md)
+9. [Lambda Expression](https://github.com/jxes993409/cpp-self-study/tree/main/9/README.md)
