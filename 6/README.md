@@ -1,7 +1,7 @@
 # Type Casting
 ## Implicit casting
 ### Implicit casting of data type
-Be careful about the precision differences between `type A` and `type B`, may cause overflow
+當隱式轉換時需要注意 `type A` 與 `type B` 之間的精度，避免造成溢位
 ```
 double a = 3.5e39;
 float b = a;
@@ -32,7 +32,7 @@ sub_class* p_sub = new sub_class();
 base_class* p_base = p_sub;
 ```
 ### Conversion constructor
-Using a `conversion constructor`, even if there is no derived relationship between two classes, it is still possible to cast an object from class A to class B
+當使用 `conversion constructor` (轉換建構子) 時，即便兩個 class 之間沒有衍生的關係，還是能將 class A 轉換成 class B
 ```
 class class_a {};
 
@@ -45,7 +45,7 @@ public:
 class_a cls_a;
 class_b cls_b = cls_a;
 ```
-`copy constructor` is a special case of `conversion constructor`
+`copy constructor` 是 `conversion constructor` 的特例
 ```
 class class_c
 {
@@ -56,11 +56,9 @@ public:
 
 ## Explicit casting
 ### Dynamic cast
-`dynamic_cast` is often used for downcasting in a base class to derived class hierarchy
-
-When compiling, if a base class is cast to a derived class, the base class must be a polymorphic class
-
-When executing, the program checks whether downcasting is possible. If not, it throws a `std::bad_cast exception` for references and `returns nullptr` for pointers
+`dynamic cast` (動態轉換) 通常用於 downcasting，從 base class (基類) 轉換到 derived class (衍生類)
+* 當編譯時，如果想將 base class 轉換到 derived class，base class 必須是 polymorphism (多型)
+* 當執行時，程式會確認能否 downcasting，如果不行，reference 會丟出 `std::bad_cast exception`，pointer 會回傳 `returns nullptr`
 ```
 class base_class
 {
@@ -105,7 +103,7 @@ sub_class* ptr = dynamic_cast<sub_class*>(base_obj);
 sub_class& ref = dynamic_cast<sub_class&>(*base_obj);
 ```
 ### Static cast
-`static_cast` is often used for downcasting and upcasting, and only checks the validity of the cast at compile time
+`static_cast` 通常用在 downcasting 或 upcasting，並且只在編譯時確認轉換是否有效
 ```
 base_class* base_ptr;
 sub_class* sub_ptr;
@@ -126,7 +124,7 @@ error: invalid ‘static_cast’ from type ‘class_a*’ to type ‘sub_class*�
    82 |     sub_ptr = static_cast<sub_class*>(&a_obj);
 ```
 ### Reinterpret cast
-`reinterpret cast` can convert a pointer to any other pointer type and can also cast an unsigned long to a pointer
+`reinterpret cast` 可以將 pointer 轉換成任何類型的 pointer，也可將 unsigned long 直接轉換成指標
 ```
 base_class* base_ptr;
 sub_class* sub_ptr;
@@ -139,7 +137,7 @@ base_ptr = reinterpret_cast<base_class*>(0xFF);
 long address = reinterpret_cast<long>(&a_obj);
 ```
 ### Const cast
-`const_cast` can convert data to a constant type or remove its constant qualifier
+`const_cast` 可以將資料轉換為常數型態，或移除 constant qualifier (常數限定符)
 ```
 void print_str(char* str)
 {
@@ -156,14 +154,14 @@ error: invalid conversion from ‘const char*’ to ‘char*’ [-fpermissive]
       |                   |
       |                   const char*
 ```
-Use `const_cast`
+使用 `const_cast` 即可解決問題
 ```
 print_str(const_cast<char*>(str));
 ```
 ```
 string: Hello World!
 ```
-However, even if the constant qualifier is removed from the data, it still cannot be modified
+常數資料即便移除 constant qualifier 後，仍然不能對內容進行修改
 ```
 void print_str(char* str)
 {

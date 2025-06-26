@@ -12,7 +12,7 @@
 
 MAX_SIZE = 50
 ```
-## replace (Use inline as an alternative solution)
+## replace (也可使用 inline 代替)
 ```
 #define MUL(a, b) a * b
 
@@ -30,7 +30,7 @@ MUL(3, 2)     // 6
 MUL(3, 2 + 1) // (3 * (2 + 1)) = 9
 ```
 ## stringification operator
-`#` operator converts a macro parameter into a string representation
+`#` 將 marco 中的參數轉換為字串
 ```
 #define PRINT(a) cout << #a << " = " << (a) << endl
 
@@ -38,7 +38,7 @@ int a = 5;
 PRINT(a * 3 + 6); // a * 3 + 6 = 21
 ```
 ## token pasting operator
-`##` operatro combine two tokens into one token
+`##` 將兩個 token 合併成一個 token
 ```
 #define MEMBER(type, a) type m_##a
 

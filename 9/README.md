@@ -6,7 +6,7 @@
 };
 ```
 ## lamda expression example
-Using lambda expressions can make code more concise
+lambda expressions 能讓程式更加簡潔
 ```
 struct _p
 {
@@ -57,7 +57,7 @@ after sort: 33 22 20 11 10 9 8 6 5 0 -5
 ```
 ## Capture clause
 ### capture by reference / value
-1. Capture by reference ensures that when the value is updated, the variable in the lambda expression is also updated
+1. `capture by reference` 可以保證當數值更新時，在 lambda expression 中的值也會更新
 ```
 function<int(int, int)> p_0 = [x, y](int a, int b) -> int
 {
@@ -79,7 +79,7 @@ cout << p_1(10, 20) << endl;
 130
 270
 ```
-2. The variable captured by value is const type, meaning its value cannot be modified
+2. `capture by value` 的變數是常數型態，不能在 lambda function 中對它修改
 ```
 function<int(int, int)> p_0 = [x, y](int a, int b) -> int
 {
@@ -92,7 +92,7 @@ error: assignment of read-only variable ‘x’
    24 |         x = 10;
       |         ~~^~~~
 ```
-Adding `mutable` allows a const variable to be modified
+增加 `mutable` 便可允許常數型態的變數在 lambda function 中更新，並且不會影響變數本身的值
 ```
 function<int(int, int)> p_2 = [x, y](int a, int b) mutable -> int
 {
@@ -106,13 +106,13 @@ cout << p_2(10, 20) << endl;
 160
 ```
 ## Automatically capture
-1. `[=]` capture variables by `value`
-2. `[&]` capture variables by `reference`
-3. `[&, =var]` captures variables by `reference` by default, while specific variables are captured by `value`
-4. `[=, &var]` captures variables by `value` by default, while specific variables are captured by `reference`
-5. `[=, =var]` and `[&, &var]` are ileagal, because default and specific are same
+1. `[=]` 以 `value` 擷取
+2. `[&]` 以 `reference` 擷取
+3. `[&, =var]` 以 `reference` 為擷取預設，特定變數以 `value` 擷取
+4. `[=, &var]` 以 `value` 為擷取預設，特定變數以 `reference` 擷取
+5. `[=, =var]` 與 `[&, &var]` 是不合法的，因為預設跟特定的擷取方式是一樣的
 ## capture by reference out of scope
-Because the variables captured by reference no longer exist, unexpected results may occur
+擷取的變數已經不存在，可能會導致無法預期的行為發生
 ```
 function<int(int, int)> create_lambda()
 {
@@ -130,11 +130,11 @@ cout << p_3(10, 20) << endl;
 -1099568934
 ```
 ## capture class member
-1. `[this]` capture by `reference`
-2. `[*this]` capture by `value`. If modification is needed, add `mutable` to the expression
-3. `[=], [&], [&, this]` are capture `this` by `reference
-4. `[=, *this]` support since C++ 17
-5. `[=, this]` support since C++ 20
+1. `[this]` 以 `reference` 擷取
+2. `[*this]` 以 `value` 擷取，如果需要修改成員內容，在 lambda 表達式增加 `mutable`
+3. `[=], [&], [&, this]` 皆以 `reference` 擷取 `this`
+4. `[=, *this]` 從 C++ 17 開始支援
+5. `[=, this]` 從 C++ 20 開始支援
 ```
 class lambda_class
 {

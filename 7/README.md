@@ -18,7 +18,7 @@ cout << result << endl;
 ```
 5.3
 ```
-`std::function` can encapsulate struct or class function
+`std::function` 可以封裝 struct 或 class 的 function
 ```
 struct linear_function
 {
@@ -38,7 +38,7 @@ cout << result_1 << endl;
 ```
 15.5
 ```
-`std::function` can encapsulate struct or class member
+`std::function` 可以封裝 struct 或 class 的 member
 ```
 function<double(linear_function&)> func_2 = &linear_function::a_;
 cout << func_2(l) << endl;
@@ -46,7 +46,7 @@ cout << func_2(l) << endl;
 ```
 2
 ```
-`std::function` can perform type erasure and use a unified interface `operator()` to invoke functions
+`std::function` 可以實現 type erasure (類型擦除)，並使用統一個介面 `operator()` 來呼叫函數
 ```
 double add(double a, double b)
 {
@@ -85,7 +85,7 @@ cout << my_map['*'](4.0, 2.0) << endl;
 template<class M, class T>
 mem_fn(M T::*pm) noexcept;
 ```
-Compare to `std::function`, `std::mem_fn` is used exclusively for encapsulating functions of structs or classes
+相較於 `std::function`，`std::mem_fn` 僅用於封裝 struct 或 class 的 function
 ```
 struct my_struct
 {
@@ -105,6 +105,7 @@ struct my_struct
     }
 };
 
+my_struct data_0{2.0};
 function<float(my_struct&, float, float)> mem_fn_0 = mem_fn(&my_struct::calculate);
 float result_0 = mem_fn_0(data_0, 2.0, 3.0);
 cout << result_0 << endl;
@@ -138,7 +139,7 @@ cout << ", result_0: " << result_0 << endl;
 ```
 a: 1, b: 2, c: 3, result_0: 6
 ```
-can use `std::placeholders` as argument
+如果想動態調整參數，可以使用 `std::placeholders`
 ```
 function<int(int)> bind_fn_1 = bind(sum, 1, placeholders::_1, 3);
 int result_1 = bind_fn_1(5);
@@ -147,7 +148,7 @@ cout << ", result_1: " << result_1 << endl;
 ```
 a: 1, b: 5, c: 3, result_1: 9
 ```
-When a variable is used as an argument, its value does not change when the variable itself
+將變數作為參數時，`bind_fn` 的結果不會隨著變數的值改變
 ```
 int n_2 = 7;
 function<int()> bind_fn_2 = bind(sum, 1, n_2, 3);
@@ -158,7 +159,7 @@ cout << ", result_2: " << result_2 << endl;
 ```
 a: 1, b: 7, c: 3, result_2: 11
 ```
-Use `std::cref()` can solve the problem
+可以使用 `std::cref()` 來解決上面的問題
 ```
 int n_3 = 7;
 function<int()> bind_fn_3 = bind(sum, 1, cref(n_3), 3);

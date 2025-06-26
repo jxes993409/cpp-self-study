@@ -13,22 +13,22 @@ struct Student
 struct Student student_0 = {"Tom", "000", 0};
 Student student_1 = {"Tom", "000", 0};
 
-// initialize all variable to 0
+// 建構 Student，並將變數初始化為 0
 Student student_2 = {};
 
-// construct by pointer
+// 建構 Student 的指標
 Student* student_3 = new Student{"Tom", "000", 0};
 ```
 
-The priority `.` is higher than `*`.
+`.`的優先級比`*`還高
 ```
 (*student_3).name (v)
 *student_3.name   (x)
 ```
 
-## split data by bit
+## 指定每個資料的 bit 大小
 ```
-// data type should be same
+// 所有變數型態都要相同
 struct Input_data
 {
     unsigned int ready: 1;
@@ -56,8 +56,7 @@ union my_union
 };
 ```
 ## construct union
-Every instance use same memory space
-`union_1.data3 = {'a', 'b', 0xFF}` will overwrite `union_1.data1 = 0xFFFF`
+Union 中的資料共用相同的記憶體空間，因此 `union_1.data3 = {'a', 'b', 0xFF}` 會覆寫 `union_1.data1 = 0xFFFF`
 ```
 my_union union_1;
 union_1.data1 = 0xFFFF;
@@ -66,6 +65,7 @@ union_1.data3 = {'a', 'b', 0xFF};
 
 # Enum
 ## create enum class (avoid conflict)
+使用 `enum class` 取代 `enum`
 ```
 enum class color_type_1
 {

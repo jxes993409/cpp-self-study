@@ -1,5 +1,5 @@
 # Function Template
-Use a function template to avoid writing the same algorithm for different data types in your C++ file
+使用 function template 可以避免重複相同演算法，不同變數型態的程式
 ```
 template<class T>
 // template<typename T> also works!
@@ -20,7 +20,7 @@ printf("a: %d, b: %d\n", a, b);
 a: 5, b: 6
 a: 6, b: 5
 ```
-If the data types of a and b are both correct, the compiler will prioritize the overloaded function when calling `my_max(a, b)`
+如果變數型態都正確，程式會優先選擇 overload function
 ```
 template<class T1, class T2>
 T1 my_max(T1& a, T2& b)
@@ -64,14 +64,16 @@ my_swap<int>(a, b);
 ```
 template void my_swap<int>(a, b);
 ```
-|Type|Advantages|Disadvantages|
+
+|方式|優點|缺點|
 |:-:|:-:|:-:|
-|Explicit Instantiation|1.Generates only **specific template** versions.<br>2. **Reduces duplicate instantiation** across multiple files.|1. **Requires manual effort to explicitly** specify template parameters.<br>2. May reduce code flexibility for unforeseen types.
-|Implicit Instantiation|1. **Automatically generates template** instances as needed.<br>2. **Enhances flexibility** for different types.<br>|1. May lead to **redundant instantiations**.<br>2. Can **increase compilation overhead** in large projects.|
+|Explicit Instantiation|1.只生成特定模板<br> 2. 減少跨檔案的重複實例|1. 需要自行明確指定模板的參數<br>2. 減少程式碼的靈活度
+|Implicit Instantiation|1. 自動生成模板的實例<br>2. 增強靈活性<br>|1. 可能導致有重複的實例<br>2. 在大型專案中，可能需要較長的編譯時間|
 
 # Class Template
 ## Specialized template class
-A specialized template class does not inherit from the template class; therefore, `output()` function needs to be implemented separately.
+specialized template class 不會從 template class 繼承，
+因此在 `class my_vector<string>` 中，`output()` 需要重新實現
 ```
 template<typename T>
 class my_vector
@@ -173,14 +175,14 @@ data_4.output();
 partially specialized template class my_class<int, T2>
 partially specialized template class my_class<T1, float>
 ```
-How about `my_class<int, float> data_5(0, 0.0)`?
+如果呼叫 `my_class<int, float> data_5(0, 0.0)`
 
 ```
 error: ambiguous template instantiation for ‘class my_class<int, float>’
    97 |         my_class<int, float> data_5(0, 0.0);
       |
 ```
-The compiler cannot determine which template class to use, need to create another specialized template class
+compiler 無法決定該用哪個 template，因此需要再額外創建一個 `class my_class<int, float>` 的模板
 ```
 template<>
 class my_class<int, float>
@@ -228,9 +230,9 @@ data_6.output();
 specialized template class for pointer my_class<T1*, T2*>
 ```
 ## None-type parameter
-For example, you can construct `my_array` using `my_array<int, n>`, where `n` is a constant type
+`my_array` 可以透過 `my_array<int, n>` 創建，其中 `n` 是常數型態
 
-If `template<typename T = float, int N = 5>` has default type, you can construct an instance using `my_array<>`
+如果 `template<typename T = float, int N = 5>` 有預設的模板，可以直接 `my_array<>` 來使用模板
 ```
 // none-type parameter
 template<typename T = float, int N = 5>
@@ -263,9 +265,9 @@ const int n_1 = 5;
 int n_2 = 5;
 
 my_array<int, 5> data_7(arr_0);
-// n can be const type
+// n 是常數型態
 my_array<int, n_1> data_8(arr_0);
-// n_2 must be constant type
+// n_2 需要是常數型態
 // my_array<int, n_2> data_9(arr_0);
 
 // int, 5

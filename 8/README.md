@@ -4,7 +4,7 @@
 template<class T, class Deleter = std::default_delete<T>>
 class unique_ptr;
 ```
-`unique_ptr` cannot point two pointer to same object
+`unique_ptr` 不能將不同指標指向同個物件
 ```
 class linear_line
 {
@@ -31,12 +31,12 @@ error: use of deleted function ‘std::unique_ptr<_Tp, _Dp>::unique_ptr(const st
    25 |         unique_ptr<linear_line> u_ptr_1 = u_ptr_0;
       |                                           ^~~~~~~
 ```
-Create `unique_ptr`
+創建 `unique_ptr`
 ```
 unique_ptr<linear_line> u_ptr_0(new linear_line(2.0, 3.0));
 unique_ptr<linear_line> u_ptr_1 = make_unique<linear_line>(3.0, 4.0);
 ```
-Like a normal pointer, use `operator->` to access class functions or members
+與一般指標相同，使用 `operator->` 使用 class function 或 member
 ```
 cout << u_ptr_0->output_y(5.0) << endl;
 cout << u_ptr_1->output_y(5.0) << endl;
@@ -45,13 +45,12 @@ cout << u_ptr_1->output_y(5.0) << endl;
 13
 19
 ```
-`unique_ptr` manages memory automatically
+`unique_ptr` 會自動管理指標
 ```
 ~linear_line()
 ~linear_line()
 ```
-These operations will delete the objects they manage
-
+這些操作會刪除原本管理的物件
 1. `std::move`
 2. point to `nullptr`
 3. reset `unique_ptr`
@@ -63,12 +62,11 @@ unique_ptr<linear_line> u_ptr_4(new linear_line(2.0, 3.0));
 u_ptr_2 = move(u_ptr_0);
 // point to nullptr
 u_ptr_3 = nullptr;
-// unique_ptr.reset, will delete object first and create new object
+// unique_ptr.reset，先刪除原本的指標，再創建新的物件
 u_ptr_4.reset(new linear_line(2.0, 3.0));
 ```
-For example, sorting normal objects involves copy overhead, but pointers only need to copy addresses, which reduces the overhead
-
-With a minor performance trade-off, `unique_ptr` automatically manages memory, making the program safer
+若想排序物件，通常有複製的開銷，但指標只需要複製地址，能大幅減少複製的開銷
+只需要微小的性能損失，`unique_ptr` 便能自動管理記憶體，讓程式更加安全
 ```
 struct package
 {
@@ -133,7 +131,7 @@ for (int i = 0; i < 10000; i++)
 sort(vec_ptr_packages.begin(), vec_ptr_packages.end(), compare());
 ```
 ## Execution time table (with -O2 argument)
-||normal method (µs)|unique_ptr (µs)|normal pointer (µs)|
+||normal method (µs)|unique_ptr (µs)|normal指標(µs)|
 |:-:|:-:|:-:|:-:|
 |1|5465|573|620|
 |2|5280|643|594|
@@ -141,11 +139,11 @@ sort(vec_ptr_packages.begin(), vec_ptr_packages.end(), compare());
 |4|5409|584|596|
 |5|5009|604|612|
 # Shared pointer
-Compared to `unique_ptr`, `shared_ptr` can point to same object
+相較於 `unique_ptr`, `shared_ptr` 可以指向同個物件
 
-`use_count()` can be used to determine how many pointers point to the same object
+`use_count()` 用來記錄有多少個指標指向同個物件
 
-`unique()` can be used to determine which pointers is the only one pointing to the object
+`unique()` 可以確定該指標是否是唯一的指標指向某個物件
 ```
 shared_ptr<linear_line> s_ptr_0(new linear_line(2.0, 3.0));
 shared_ptr<linear_line> s_ptr_1 = s_ptr_0;
@@ -158,7 +156,7 @@ cout << s_ptr_0.unique() << endl;
 3
 0
 ```
-`shared_ptr` support `dynamic_pointer_cast`, `static_pointer_cast` and `const_pointer_cast`
+`shared_ptr` 支援 `dynamic_pointer_cast`、`static_pointer_cast` 以及 `const_pointer_cast`
 ```
 class base
 {
@@ -180,11 +178,8 @@ cout << s_ptr_3.use_count() << endl;
 ```
 3
 ```
-When using `shared_ptr`, avoid circular references, as they can cause memory leaks
-
-In this case, `person._partner.use_count()` cannot be zero
-
-Hence, the object cannot be deleted
+當使用 `shared_ptr` 時，應避免迴圈引用，會造成記憶體洩漏
+因為 `person._partner.use_count()` 不為 0，因此該物件不能被刪除
 ```
 class person
 {
@@ -220,7 +215,7 @@ ABC person()
 DEF person()
 GHI person()
 ```
-Replace `shared_ptr<person> _partner` with `weak_ptr<person> _partner`
+將 `shared_ptr<person> _partner` 替換成 `weak_ptr<person> _partner`
 ```
 ABC person()
 DEF person()
@@ -229,9 +224,10 @@ ABC ~person()
 DEF ~person()
 GHI ~person()
 ```
-1. access valid `shared_ptr`
-2. Check if the object is valid.<br>If `weak_ptr.lock()` returns `nullptr`, it means the object pointed to by `weak_ptr` has been deleted
-3. Avoid race condition<br>In multithreaded conditions, `weak_ptr.lock()` is an atomic operation that can prevent race conditions
+`weak_ptr.lock()` 用途
+1. 存取有效的 `shared_ptr`
+2. 檢查物件是有有效，，如果 `weak_ptr.lock()` 回傳 `nullptr`，代表被 `weak_ptr` 指向的物件已被刪除
+3. 為避免競爭條件，control block 中的 counter 是原子化的
 ```
 weak_ptr<base> w_ptr_0;
 {
@@ -249,7 +245,7 @@ cout << "out scope: " << s_ptr_8 << endl;
 in scope: 0x55da7079e4e0
 out scope: 0
 ```
-1. Create shared_ptr (use_count +1)<br>![image_0](img/0.png)
-2. Create weak_ptr (weak_count +1)<br>If use_count > 0, it means the object exists, and the `weak_ptr` can observe the object<br>![image_1](img/1.png)
-3. Delete shared_ptr (use_count -1)<br>When leaving the scope, the `shared_ptr` is deleted<br>If `use_count = 0`, it means the object has been destructed<br>![image_2](img/2.png)
-4. Delete weak_ptr (weak_count -1)<br>When leaving the scope, the `weak_ptr` and `control block` are deleted<br>![image_3](img/3.png)
+1. 創建 `shared_ptr` (use_count +1)<br>![image_0](img/0.png)
+2. 創建 `weak_ptr` (weak_count +1)<br>如果 use_count > 0, 代表物件存在，並且`weak_ptr` 可以觀察物件<br>![image_1](img/1.png)
+3. 刪除 `shared_ptr` (use_count -1)<br>當離開 scope 後，`shared_ptr` 就會被銷毀，如果 `use_count = 0`，那 `shared_ptr` 便會刪除管理的物件<br>![image_2](img/2.png)
+4. 刪除 `weak_ptr` (weak_count -1)<br>當離開 scope 後，`weak_ptr` 以及 `control block` 被刪除<br>![image_3](img/3.png)

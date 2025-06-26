@@ -1,5 +1,5 @@
 # Namespace
-Using a namespace can help avoid conflicts with functions that have the same name in other files
+利用 namespace 可以避免相同 function 之間的衝突
 ```
 namespace space_0
 {
@@ -58,7 +58,7 @@ int max_num = ::my_max(5, 6);
 ```
 namespace global space my_max
 ```
-When variables have the same name, the namespace should be explicitly declared
+當變數有相同的名字時，需要特別標明 namespace
 ```
 int a = 1;
 namespace space_2
@@ -82,9 +82,7 @@ space_2::space_3::a = 3
 
 # Exception
 ## Try & Catch
-`try` statement can be followed by multiple `catch` blocks
-
-Among them, a more general catch block will have lower priority
+`try` 可以接著多個 `catch` 的 block，越通用的 block 優先級越低
 ```
 try
 {
@@ -96,14 +94,14 @@ catch (Type e)
 }
 ```
 ```
-// not recommended to use catch blocks that are unable to process the exceptions they catch
+// 若 exception 無法處理，則不要創建相應的 catch block
 catch(...)
 {
 
 }
 ```
 ## Throw
-The data type of `throw` can be of any type, but using a class derived from `exception` or inheriting from it is recommended.
+`throw` 的資料型態可以是任何型態，但建議從 `exception` 繼承或衍生
 ### const char*
 ```
 try

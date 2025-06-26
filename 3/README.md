@@ -13,7 +13,7 @@ ostream& operator<<(ostream& o, vector<int>& numbers)
 
 vector<int> numbers{2, 4, 6, 8, 10};
 cout << numbers << endl;
-// same as
+// 與下方相同
 operator<<(cout, numbers) << endl;
 ```
 ```
@@ -71,6 +71,10 @@ imaginary: 6.2
 ```
 
 ## operator ++
+`++num` 與 `num++` 不同
+* `++num` 中的 function 直接將物件 `num + 1` 後回傳 `this` 即可
+* `num++` 需要先創建一個原本的物件 `temp` 保留原本的值，並呼叫 `++num` 的 function 將 `num + 1` 後，再回傳 `++num` 前的物件，即 `temp`
+
 ```
 class my_int
 {
@@ -178,8 +182,9 @@ public:
         }
     }
     linear_function* operator->() {return m_ptr;}
-    // delete ptr_1 = ptr_2 and ptr_1(ptr_2), avoid point to same address
+    // 刪除 ptr_1 = ptr_2 的操作，避免指向同個地址
     local_ptr(const local_ptr&) = delete;
+    // 刪除 ptr_1(ptr_2) 的操作，避免指向同個地址
     local_ptr& operator=(const local_ptr&) = delete;
 };
 
