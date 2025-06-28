@@ -117,7 +117,7 @@ decltype(s1.append("world")) s5 = s1; // string&
 decltype(auto) s6 = s1 + "world";       // string
 decltype(auto) s7 = s1.append("world"); // string&
 ```
-* g2 的問題為回傳一個無效的引用，該引用可能是無效的
+* g2 的問題為回傳一個無效的引用
 ```
 decltype(auto) g1(int i)
 // int g1(int)
